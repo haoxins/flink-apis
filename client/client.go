@@ -9,29 +9,30 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-func NewClient(baseUrl string) *Client {
+func NewClient(baseURL string) *Client {
 	return &Client{
-		baseUrl: baseUrl,
+		baseURL: baseURL,
 		h:       *resty.New(),
 	}
 }
 
 func (c *Client) GetJobList() (*JobList, error) {
 	resp, err := c.h.R().SetResult(JobList{}).
-		Get(c.baseUrl + "/jobs/overview")
+		Get(c.baseURL + "/jobs/overview")
+
 	if err != nil {
 		return nil, err
 	}
 
 	jobList := resp.Result().(JobList)
-
 	sort.Sort(JobByStartTime(jobList.Jobs))
 
 	return &jobList, err
 }
 
 func (c *Client) StopJob(jobID string) error {
-	_, err := c.h.R().Patch(fmt.Sprintf("%s/jobs/%s?mode=cancel", c.baseUrl, jobID))
+	_, err := c.h.R().Patch(fmt.Sprintf("%s/jobs/%s?mode=cancel", c.baseURL, jobID))
+
 	if err != nil {
 		return err
 	}
@@ -41,7 +42,7 @@ func (c *Client) StopJob(jobID string) error {
 
 // TriggerSavepoint triggers an async savepoint operation.
 func (c *Client) TriggerSavepoint(jobID string, dir string, cancel bool) (*SavepointTriggerID, error) {
-	url := fmt.Sprintf("%s/jobs/%s/savepoints", c.baseUrl, jobID)
+	url := fmt.Sprintf("%s/jobs/%s/savepoints", c.baseURL, jobID)
 	jsonStr := fmt.Sprintf(`{
 		"target-directory" : "%s",
 		"cancel-job" : %v
@@ -57,12 +58,13 @@ func (c *Client) TriggerSavepoint(jobID string, dir string, cancel bool) (*Savep
 	}
 
 	triggerID := resp.Result().(SavepointTriggerID)
+
 	return &triggerID, err
 }
 
 func (c *Client) GetSavepointStatus(
 	jobID string, triggerID string) (*SavepointStatus, error) {
-	url := fmt.Sprintf("%s/jobs/%s/savepoints/%s", c.baseUrl, jobID, triggerID)
+	url := fmt.Sprintf("%s/jobs/%s/savepoints/%s", c.baseURL, jobID, triggerID)
 	status := &SavepointStatus{JobID: jobID, TriggerID: triggerID}
 
 	var stateID SavepointStateID
@@ -92,6 +94,7 @@ func (c *Client) GetSavepointStatus(
 		if err != nil {
 			return nil, err
 		}
+
 		// Success
 		if location, ok := opJSON["location"]; ok && location != nil {
 			err = json.Unmarshal(*location, &status.Location)
@@ -99,6 +102,7 @@ func (c *Client) GetSavepointStatus(
 				return nil, err
 			}
 		}
+
 		// Failure
 		if failureCause, ok := opJSON["failure-cause"]; ok && failureCause != nil {
 			err = json.Unmarshal(*failureCause, &status.FailureCause)
@@ -141,13 +145,14 @@ func (c *Client) TakeSavepointAsync(jobID string, dir string) (string, error) {
 }
 
 func (c *Client) GetJobExceptions(jobId string) (*JobExceptions, error) {
-	url := fmt.Sprintf("%s/jobs/%s/exceptions", c.baseUrl, jobId)
+	url := fmt.Sprintf("%s/jobs/%s/exceptions", c.baseURL, jobId)
+
 	resp, err := c.h.R().SetResult(JobExceptions{}).Get(url)
 	if err != nil {
 		return nil, err
 	}
 
-	exp := resp.Result().(JobExceptions)
+	exceptions := resp.Result().(JobExceptions)
 
-	return &exp, nil
+	return &exceptions, nil
 }

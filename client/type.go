@@ -14,7 +14,7 @@ const (
 // Client - The Flink API client.
 type Client struct {
 	h       resty.Client
-	baseUrl string
+	baseURL string
 }
 
 type ResponseError struct {
