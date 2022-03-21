@@ -7,3 +7,5 @@
 [Go Docs]: https://pkg.go.dev/github.com/haoxins/flink-apis-go
 
 * The Golang APIs for Flink cluster APIs, Flink K8s Operator CRDs and others.
+  - [Flink Rest API](client)
+  - [Flink Operator Spec](operator)
