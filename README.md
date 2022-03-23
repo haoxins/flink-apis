@@ -7,5 +7,7 @@
 [Go Docs]: https://pkg.go.dev/github.com/haoxins/flink-apis-go
 
 * The Golang APIs for Flink cluster APIs, Flink K8s Operator CRDs and others.
-  - [Flink Rest API](client)
-  - [Flink Operator Spec](operator)
+  - [Flink Operator v1alpha1 API](v1alpha1)
+
+* The [Apache Flink Operator](https://github.com/apache/flink-kubernetes-operator) is written by Java.
+  This repository contains the operator's API definitions by Golang.
