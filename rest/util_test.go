@@ -1,4 +1,4 @@
-package client
+package rest
 
 import (
 	. "github.com/onsi/ginkgo/v2"
