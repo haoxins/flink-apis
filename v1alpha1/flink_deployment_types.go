@@ -18,6 +18,15 @@ type FlinkDeployment struct {
 	Spec FlinkDeploymentSpec `json:"spec"`
 }
 
+//+kubebuilder:object:root=true
+
+type FlinkDeploymentList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+
+	Items []FlinkDeployment `json:"items"`
+}
+
 type FlinkDeploymentSpec struct {
 	Image string `json:"image"`
 

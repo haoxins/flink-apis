@@ -16,6 +16,15 @@ type FlinkSessionJob struct {
 	Spec FlinkSessionJobSpec `json:"spec"`
 }
 
+//+kubebuilder:object:root=true
+
+type FlinkSessionJobList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+
+	Items []FlinkSessionJob `json:"items"`
+}
+
 type FlinkSessionJobSpec struct {
 	ClusterId string  `json:"clusterId"`
 	Job       JobSpec `json:"job"`
