@@ -5,7 +5,7 @@ import (
 )
 
 func init() {
-	SchemeBuilder.Register(&FlinkDeployment{})
+	SchemeBuilder.Register(&FlinkDeployment{}, &FlinkDeploymentList{})
 }
 
 //+kubebuilder:object:root=true
