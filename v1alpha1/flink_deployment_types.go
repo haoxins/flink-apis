@@ -4,10 +4,6 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-func init() {
-	SchemeBuilder.Register(&FlinkDeployment{}, &FlinkDeploymentList{})
-}
-
 //+kubebuilder:object:root=true
 //TODO +kubebuilder:subresource:status
 
@@ -15,16 +11,8 @@ type FlinkDeployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec FlinkDeploymentSpec `json:"spec"`
-}
-
-//+kubebuilder:object:root=true
-
-type FlinkDeploymentList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-
-	Items []FlinkDeployment `json:"items"`
+	Spec   FlinkDeploymentSpec   `json:"spec"`
+	Status FlinkDeploymentStatus `json:"status"`
 }
 
 type FlinkDeploymentSpec struct {
@@ -41,6 +29,23 @@ type FlinkDeploymentSpec struct {
 	TaskManager TaskManagerSpec `json:"taskManager"`
 }
 
+const (
+	JobManagerStatusReady = "READY"
+
+	JobManagerStatusDeployedNotReady = "DEPLOYED_NOT_READY"
+
+	JobManagerStatusDeploying = "DEPLOYING"
+
+	// TODO: currently a mix of SUSPENDED and ERROR, needs cleanup
+	JobManagerStatusMissing = "MISSING"
+
+	JobManagerStatusError = "ERROR"
+)
+
+type FlinkDeploymentStatus struct {
+	JobManagerStatus string `json:"jobManagerDeploymentStatus"`
+}
+
 type JobManagerSpec struct {
 	Replicas int32        `json:"replicas"`
 	Resource ResourceSpec `json:"resource"`
@@ -53,4 +58,17 @@ type TaskManagerSpec struct {
 type ResourceSpec struct {
 	Memory string  `json:"memory"`
 	CPU    float32 `json:"cpu"`
+}
+
+//+kubebuilder:object:root=true
+
+type FlinkDeploymentList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+
+	Items []FlinkDeployment `json:"items"`
+}
+
+func init() {
+	SchemeBuilder.Register(&FlinkDeployment{}, &FlinkDeploymentList{})
 }
