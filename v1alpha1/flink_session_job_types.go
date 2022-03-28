@@ -30,6 +30,12 @@ type FlinkSessionJobSpec struct {
 	Job       JobSpec `json:"job"`
 }
 
+const (
+	UpgradeModeSavepoint = "savepoint"
+	UpgradeModeLastState = "last-state"
+	UpgradeModeStateless = "stateless"
+)
+
 type JobSpec struct {
 	JarURI      string `json:"jarURI"`
 	Parallelism int32  `json:"parallelism"`
