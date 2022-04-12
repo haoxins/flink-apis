@@ -9,7 +9,8 @@ type FlinkSessionJob struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec FlinkSessionJobSpec `json:"spec"`
+	Spec   FlinkSessionJobSpec   `json:"spec"`
+	Status FlinkSessionJobStatus `json:"status"`
 }
 
 type FlinkSessionJobSpec struct {
@@ -28,6 +29,20 @@ type JobSpec struct {
 	Parallelism int32  `json:"parallelism"`
 	EntryClass  string `json:"entryClass"`
 	UpgradeMode string `json:"upgradeMode"`
+}
+
+type FlinkSessionJobStatus struct {
+	JobStatus JobStatusSpec `json:"jobStatus"`
+}
+
+const (
+	SessionJobStateRunning = "RUNNING"
+)
+
+type JobStatusSpec struct {
+	JobId   string `json:"jobId"`
+	JobName string `json:"jobName"`
+	State   string `json:"state"`
 }
 
 //+kubebuilder:object:root=true
