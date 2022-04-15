@@ -7,7 +7,7 @@
 [Go Docs]: https://pkg.go.dev/github.com/haoxins/flink-apis-go
 
 * The Golang APIs for [Apache Flink K8s Operator] APIs (CRDs) and Flink Rest APIs.
-  - [Flink Operator v1alpha1 APIs](v1alpha1)
+  - [Flink Operator v1beta1 APIs](v1beta1)
   - [Flink Rest APIs](rest)
 
 * The [Apache Flink K8s Operator] is written by Java.
