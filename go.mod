@@ -1,4 +1,4 @@
-module github.com/haoxins/flink-apis-go
+module github.com/haoxins/flink-apis
 
 go 1.18
 

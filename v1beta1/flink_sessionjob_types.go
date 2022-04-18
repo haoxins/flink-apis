@@ -24,10 +24,16 @@ const (
 	UpgradeModeStateless = "stateless"
 )
 
+const (
+	SessionJobDesiredStateRunning   = "running"
+	SessionJobDesiredStateSuspended = "suspended"
+)
+
 type JobSpec struct {
 	JarURI      string `json:"jarURI"`
 	Parallelism int32  `json:"parallelism"`
 	EntryClass  string `json:"entryClass"`
+	State       string `json:"state"`
 	UpgradeMode string `json:"upgradeMode"`
 }
 
