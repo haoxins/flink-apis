@@ -25,8 +25,8 @@ const (
 )
 
 const (
-	SessionJobDesiredStateRunning   = "running"
-	SessionJobDesiredStateSuspended = "suspended"
+	SessionJobStateRunning   = "running"
+	SessionJobStateSuspended = "suspended"
 )
 
 type JobSpec struct {
@@ -38,14 +38,14 @@ type JobSpec struct {
 }
 
 type FlinkSessionJobStatus struct {
-	JobStatus JobStatusSpec `json:"jobStatus"`
+	FlinkJobStatus FlinkJobStatusSpec `json:"jobStatus"`
 }
 
 const (
-	SessionJobStateRunning = "RUNNING"
+	FlinkJobStateRunning = "RUNNING"
 )
 
-type JobStatusSpec struct {
+type FlinkJobStatusSpec struct {
 	JobId   string `json:"jobId"`
 	JobName string `json:"jobName"`
 	State   string `json:"state"`
