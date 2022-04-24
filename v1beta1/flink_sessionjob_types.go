@@ -14,8 +14,8 @@ type FlinkSessionJob struct {
 }
 
 type FlinkSessionJobSpec struct {
-	ClusterId string  `json:"clusterId"`
-	Job       JobSpec `json:"job"`
+	DeploymentName string  `json:"deploymentName"`
+	Job            JobSpec `json:"job"`
 }
 
 const (
