@@ -6,7 +6,7 @@ require (
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/onsi/ginkgo/v2 v2.1.4
 	github.com/onsi/gomega v1.19.0
-	k8s.io/api v0.23.6
+	k8s.io/api v0.24.0
 	k8s.io/apimachinery v0.24.0
 	sigs.k8s.io/controller-runtime v0.11.2
 )
