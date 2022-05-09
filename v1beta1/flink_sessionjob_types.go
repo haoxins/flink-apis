@@ -38,6 +38,7 @@ type JobSpec struct {
 }
 
 type FlinkSessionJobStatus struct {
+	Error          string             `json:"error"`
 	FlinkJobStatus FlinkJobStatusSpec `json:"jobStatus"`
 }
 
