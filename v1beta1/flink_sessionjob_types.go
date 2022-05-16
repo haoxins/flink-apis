@@ -30,11 +30,12 @@ const (
 )
 
 type JobSpec struct {
-	JarURI      string `json:"jarURI"`
-	Parallelism int32  `json:"parallelism"`
-	EntryClass  string `json:"entryClass"`
-	State       string `json:"state"`
-	UpgradeMode string `json:"upgradeMode"`
+	JarURI      string   `json:"jarURI"`
+	EntryClass  string   `json:"entryClass"`
+	Args        []string `json:"args"`
+	Parallelism int32    `json:"parallelism"`
+	State       string   `json:"state"`
+	UpgradeMode string   `json:"upgradeMode"`
 }
 
 type FlinkSessionJobStatus struct {
