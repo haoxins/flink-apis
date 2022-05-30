@@ -80,6 +80,7 @@ func (in *FlinkDeploymentSpec) DeepCopyInto(out *FlinkDeploymentSpec) {
 	}
 	out.JobManager = in.JobManager
 	out.TaskManager = in.TaskManager
+	in.JobSpec.DeepCopyInto(&out.JobSpec)
 	in.PodTemplate.DeepCopyInto(&out.PodTemplate)
 }
 

@@ -29,6 +29,8 @@ type FlinkDeploymentSpec struct {
 
 	TaskManager TaskManagerSpec `json:"taskManager"`
 
+	JobSpec JobSpec `json:"job,omitempty"`
+
 	PodTemplate corev1.PodTemplate `json:"podTemplate,omitempty"`
 }
 
