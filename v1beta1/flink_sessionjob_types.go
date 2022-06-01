@@ -32,7 +32,7 @@ const (
 type JobSpec struct {
 	JarURI      string   `json:"jarURI"`
 	EntryClass  string   `json:"entryClass"`
-	Args        []string `json:"args"`
+	Args        []string `json:"args,omitempty"`
 	Parallelism int32    `json:"parallelism"`
 	State       string   `json:"state"`
 	UpgradeMode string   `json:"upgradeMode"`
