@@ -30,12 +30,15 @@ const (
 )
 
 type JobSpec struct {
-	JarURI      string   `json:"jarURI"`
-	EntryClass  string   `json:"entryClass"`
-	Args        []string `json:"args,omitempty"`
-	Parallelism int32    `json:"parallelism"`
-	State       string   `json:"state"`
-	UpgradeMode string   `json:"upgradeMode"`
+	JarURI                string   `json:"jarURI"`
+	EntryClass            string   `json:"entryClass"`
+	Args                  []string `json:"args,omitempty"`
+	Parallelism           int32    `json:"parallelism"`
+	State                 string   `json:"state"`
+	UpgradeMode           string   `json:"upgradeMode"`
+	SavepointTriggerNonce int64    `json:"savepointTriggerNonce,omitempty"`
+	InitialSavepointPath  string   `json:"initialSavepointPath,omitempty"`
+	AllowNonRestoredState bool     `json:"allowNonRestoredState,omitempty"`
 }
 
 type FlinkSessionJobStatus struct {

@@ -14,5 +14,6 @@ $(CONTROLLER_GEN):
 gen: controller-gen
 	$(CONTROLLER_GEN) object paths="./..."
 
-fmt:
+all: gen
 	go fmt ./...
+	go vet ./...
