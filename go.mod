@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/onsi/ginkgo/v2 v2.1.4
 	github.com/onsi/gomega v1.20.1
-	github.com/samber/lo v1.27.0
+	github.com/samber/lo v1.27.1
 	k8s.io/api v0.25.0
 	k8s.io/apimachinery v0.25.0
 	sigs.k8s.io/controller-runtime v0.12.3
