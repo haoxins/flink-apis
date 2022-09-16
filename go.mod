@@ -7,7 +7,7 @@ require (
 	github.com/onsi/gomega v1.20.2
 	github.com/samber/lo v1.28.0
 	k8s.io/api v0.25.0
-	k8s.io/apimachinery v0.25.0
+	k8s.io/apimachinery v0.25.1
 	sigs.k8s.io/controller-runtime v0.13.0
 )
 
