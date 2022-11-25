@@ -18,12 +18,12 @@ type FlinkSessionJobSpec struct {
 	Job            JobSpec `json:"job"`
 }
 
-func (self FlinkSessionJobSpec) Equals(other FlinkSessionJobSpec) (bool, error) {
-	if self.DeploymentName != other.DeploymentName {
+func (sessionJob FlinkSessionJobSpec) Equals(other FlinkSessionJobSpec) (bool, error) {
+	if sessionJob.DeploymentName != other.DeploymentName {
 		return false, nil
 	}
 
-	return self.Job.Equals(other.Job)
+	return sessionJob.Job.Equals(other.Job)
 }
 
 const (
@@ -49,33 +49,33 @@ type JobSpec struct {
 	AllowNonRestoredState bool     `json:"allowNonRestoredState,omitempty"`
 }
 
-func (self JobSpec) Equals(other JobSpec) (bool, error) {
-	if self.JarURI != other.JarURI {
+func (job JobSpec) Equals(other JobSpec) (bool, error) {
+	if job.JarURI != other.JarURI {
 		return false, nil
 	}
-	if self.EntryClass != other.EntryClass {
+	if job.EntryClass != other.EntryClass {
 		return false, nil
 	}
-	if self.Parallelism != other.Parallelism {
+	if job.Parallelism != other.Parallelism {
 		return false, nil
 	}
-	if self.State != other.State {
+	if job.State != other.State {
 		return false, nil
 	}
-	if self.UpgradeMode != other.UpgradeMode {
+	if job.UpgradeMode != other.UpgradeMode {
 		return false, nil
 	}
-	if self.SavepointTriggerNonce != other.SavepointTriggerNonce {
+	if job.SavepointTriggerNonce != other.SavepointTriggerNonce {
 		return false, nil
 	}
-	if self.InitialSavepointPath != other.InitialSavepointPath {
+	if job.InitialSavepointPath != other.InitialSavepointPath {
 		return false, nil
 	}
-	if self.AllowNonRestoredState != other.AllowNonRestoredState {
+	if job.AllowNonRestoredState != other.AllowNonRestoredState {
 		return false, nil
 	}
 
-	return IsArgsEqual(self.Args, other.Args)
+	return IsArgsEqual(job.Args, other.Args)
 }
 
 type FlinkSessionJobStatus struct {

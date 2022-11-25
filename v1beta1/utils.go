@@ -16,7 +16,7 @@ func IsArgsEqual(a []string, b []string) (bool, error) {
 	}
 
 	if len(a)%2 != 0 {
-		return false, errors.New("The args must be an even number")
+		return false, errors.New("the args must be an even number")
 	}
 
 	for i := 0; i < len(a); i += 2 {
