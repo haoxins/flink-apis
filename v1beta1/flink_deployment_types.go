@@ -19,6 +19,8 @@ type FlinkDeployment struct {
 type FlinkDeploymentSpec struct {
 	Image string `json:"image"`
 
+	ImagePullPolicy string `json:"imagePullPolicy,omitempty"`
+
 	FlinkVersion string `json:"flinkVersion"`
 
 	FlinkConfiguration map[string]string `json:"flinkConfiguration"`

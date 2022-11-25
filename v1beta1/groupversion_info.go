@@ -1,6 +1,6 @@
 // Package v1beta1 contains API Schema definitions for the Apache Flink Operator v1beta1 API group
-//+kubebuilder:object:generate=true
-//+groupName=flink.apache.org
+// +kubebuilder:object:generate=true
+// +groupName=flink.apache.org
 package v1beta1
 
 import (
