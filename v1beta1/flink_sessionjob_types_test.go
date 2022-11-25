@@ -41,7 +41,7 @@ var _ = Describe("Test FlinkSessionJobSpec Equals", func() {
 		j1.Job.Args = []string{""}
 		j2.Job.Args = []string{""}
 		yes, err = j1.Equals(j2)
-		Expect(err.Error()).To(Equal("The args must be an even number"))
+		Expect(err.Error()).To(Equal("the args must be an even number"))
 		Expect(yes).To(BeFalse())
 
 		j1.Job.Args = []string{"--name", "a", "--topic", "b"}
