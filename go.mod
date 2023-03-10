@@ -3,8 +3,8 @@ module github.com/haoxins/flink-apis
 go 1.20
 
 require (
-	github.com/onsi/ginkgo/v2 v2.8.4
-	github.com/onsi/gomega v1.27.2
+	github.com/onsi/ginkgo/v2 v2.9.0
+	github.com/onsi/gomega v1.27.3
 	github.com/samber/lo v1.37.0
 	k8s.io/api v0.26.2
 	k8s.io/apimachinery v0.26.2
