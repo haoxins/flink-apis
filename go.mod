@@ -8,7 +8,7 @@ require (
 	github.com/samber/lo v1.37.0
 	k8s.io/api v0.26.2
 	k8s.io/apimachinery v0.26.2
-	sigs.k8s.io/controller-runtime v0.14.5
+	sigs.k8s.io/controller-runtime v0.14.6
 )
 
 require (
