@@ -12,4 +12,8 @@
 - The [Apache Flink K8s Operator] is written by Java.
   This repository contains the operator's API definitions by Golang.
 
+| haoxins/flink-apis version | apache/flink-kubernetes-operator |
+|----------------------------|----------------------------------|
+|             v1             | release-1.5, |
+
 [Apache Flink K8s Operator]: https://github.com/apache/flink-kubernetes-operator
