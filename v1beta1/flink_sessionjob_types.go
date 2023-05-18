@@ -14,8 +14,10 @@ type FlinkSessionJob struct {
 }
 
 type FlinkSessionJobSpec struct {
-	DeploymentName string  `json:"deploymentName"`
-	Job            JobSpec `json:"job"`
+	DeploymentName     string            `json:"deploymentName"`
+	Job                JobSpec           `json:"job"`
+	RestartNonce       int64             `json:"restartNonce,omitempty"`
+	FlinkConfiguration map[string]string `json:"flinkConfiguration,omitempty"`
 }
 
 func (sessionJob FlinkSessionJobSpec) Equals(other FlinkSessionJobSpec) (bool, error) {
@@ -79,6 +81,8 @@ func (job JobSpec) Equals(other JobSpec) (bool, error) {
 }
 
 type FlinkSessionJobStatus struct {
+	// reconciliationStatus string `json:"reconciliationStatus"`
+	LifecycleState string             `json:"lifecycleState"`
 	Error          string             `json:"error"`
 	FlinkJobStatus FlinkJobStatusSpec `json:"jobStatus"`
 }
@@ -88,9 +92,12 @@ const (
 )
 
 type FlinkJobStatusSpec struct {
-	JobId   string `json:"jobId"`
-	JobName string `json:"jobName"`
-	State   string `json:"state"`
+	JobId      string `json:"jobId"`
+	JobName    string `json:"jobName"`
+	State      string `json:"state"`
+	StartTime  string `json:"startTime"`
+	UpdateTime string `json:"updateTime"`
+	// SavepointInfo SavepointInfo `json:"savepointInfo"`
 }
 
 //+kubebuilder:object:root=true

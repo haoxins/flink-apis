@@ -5,7 +5,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Test FlinkSessionJobSpec Equals", func() {
+var _ = Describe("Test FlinkSessionJobSpec", func() {
 	It("FlinkSessionJobSpec Equals should work", func() {
 		j1 := FlinkSessionJobSpec{
 			DeploymentName: "test",

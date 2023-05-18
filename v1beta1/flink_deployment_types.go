@@ -23,7 +23,9 @@ type FlinkDeploymentSpec struct {
 
 	FlinkVersion string `json:"flinkVersion"`
 
-	FlinkConfiguration map[string]string `json:"flinkConfiguration"`
+	FlinkConfiguration map[string]string `json:"flinkConfiguration,omitempty"`
+
+	LogConfiguration map[string]string `json:"logConfiguration,omitempty"`
 
 	ServiceAccount string `json:"serviceAccount"`
 
@@ -34,6 +36,38 @@ type FlinkDeploymentSpec struct {
 	JobSpec JobSpec `json:"job,omitempty"`
 
 	PodTemplate corev1.PodTemplate `json:"podTemplate,omitempty"`
+
+	RestartNonce int64 `json:"restartNonce,omitempty"`
+}
+
+type FlinkDeploymentStatus struct {
+	ReconciliationStatus string            `json:"reconciliationStatus"`
+	JobManagerStatus     string            `json:"jobManagerDeploymentStatus"`
+	ClusterInfo          map[string]string `json:"clusterInfo"`
+	TaskManager          TaskManagerInfo   `json:"taskManager"`
+}
+
+type JobManagerSpec struct {
+	Replicas    int32              `json:"replicas"`
+	Resource    ResourceSpec       `json:"resource"`
+	PodTemplate corev1.PodTemplate `json:"podTemplate,omitempty"`
+}
+
+type TaskManagerSpec struct {
+	Resource    ResourceSpec       `json:"resource"`
+	Replicas    int32              `json:"replicas,omitempty"`
+	PodTemplate corev1.PodTemplate `json:"podTemplate,omitempty"`
+}
+
+type ResourceSpec struct {
+	Memory           string  `json:"memory"`
+	CPU              float32 `json:"cpu"`
+	EphemeralStorage string  `json:"ephemeralStorage,omitempty"`
+}
+
+type TaskManagerInfo struct {
+	Replicas      int32  `json:"replicas"`
+	LabelSelector string `json:"labelSelector"`
 }
 
 const (
@@ -48,24 +82,6 @@ const (
 
 	JobManagerStatusError = "ERROR"
 )
-
-type FlinkDeploymentStatus struct {
-	JobManagerStatus string `json:"jobManagerDeploymentStatus"`
-}
-
-type JobManagerSpec struct {
-	Replicas int32        `json:"replicas"`
-	Resource ResourceSpec `json:"resource"`
-}
-
-type TaskManagerSpec struct {
-	Resource ResourceSpec `json:"resource"`
-}
-
-type ResourceSpec struct {
-	Memory string  `json:"memory"`
-	CPU    float32 `json:"cpu"`
-}
 
 //+kubebuilder:object:root=true
 
