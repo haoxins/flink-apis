@@ -22,44 +22,37 @@ var _ = Describe("Test FlinkSessionJobSpec", func() {
 			},
 		}
 
-		yes, err := j1.Equals(j2)
-		Expect(err).To(BeNil())
-		Expect(yes).To(BeTrue())
+		v := j1.Equals(j2)
+		Expect(v).To(BeTrue())
 
 		j2.DeploymentName = "test2"
-		yes, err = j1.Equals(j2)
-		Expect(err).To(BeNil())
-		Expect(yes).To(BeFalse())
+		v = j1.Equals(j2)
+		Expect(v).To(BeFalse())
 
 		j2.DeploymentName = "test"
 		j2.Job.Parallelism = 2
-		yes, err = j1.Equals(j2)
-		Expect(err).To(BeNil())
-		Expect(yes).To(BeFalse())
+		v = j1.Equals(j2)
+		Expect(v).To(BeFalse())
 
 		j2.Job.Parallelism = 1
 		j1.Job.Args = []string{""}
 		j2.Job.Args = []string{""}
-		yes, err = j1.Equals(j2)
-		Expect(err.Error()).To(Equal("the args must be an even number"))
-		Expect(yes).To(BeFalse())
+		v = j1.Equals(j2)
+		Expect(v).To(BeTrue())
 
 		j1.Job.Args = []string{"--name", "a", "--topic", "b"}
 		j2.Job.Args = []string{"--name", "a", "--topic", "b"}
-		yes, err = j1.Equals(j2)
-		Expect(err).To(BeNil())
-		Expect(yes).To(BeTrue())
+		v = j1.Equals(j2)
+		Expect(v).To(BeTrue())
 
 		j1.Job.Args = []string{"--name", "a", "--topic", "b"}
 		j2.Job.Args = []string{"--topic", "b", "--name", "a"}
-		yes, err = j1.Equals(j2)
-		Expect(err).To(BeNil())
-		Expect(yes).To(BeTrue())
+		v = j1.Equals(j2)
+		Expect(v).To(BeTrue())
 
 		j1.Job.Args = []string{"--name", "a", "--topic", "b"}
 		j2.Job.Args = []string{"--name", "b", "--topic", "a"}
-		yes, err = j1.Equals(j2)
-		Expect(err).To(BeNil())
-		Expect(yes).To(BeFalse())
+		v = j1.Equals(j2)
+		Expect(v).To(BeFalse())
 	})
 })

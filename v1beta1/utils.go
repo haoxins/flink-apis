@@ -1,39 +1,52 @@
 package v1beta1
 
 import (
-	"errors"
+	"strings"
 
 	"github.com/samber/lo"
 )
 
-func IsArgsEqual(a []string, b []string) (bool, error) {
-	if len(a) != len(b) {
-		return false, nil
+func IsArgsEqual(first []string, second []string) bool {
+	if len(first) != len(second) {
+		return false
 	}
 
-	if len(a) == 0 {
-		return true, nil
-	}
+	for len(first) > 0 {
+		s := first[0]
 
-	if len(a)%2 != 0 {
-		return false, errors.New("the args must be an even number")
-	}
-
-	for i := 0; i < len(a); i += 2 {
-		_, j, _ := lo.FindIndexOf(b, func(s string) bool {
-			return s == a[i]
+		_, i, _ := lo.FindIndexOf(second, func(str string) bool {
+			return s == str
 		})
 
-		if j < 0 {
-			return false, nil
+		if i < 0 {
+			return false
 		}
-		if a[i] != b[j] {
-			return false, nil
-		}
-		if a[i+1] != b[j+1] {
-			return false, nil
+
+		// Try to treats the two elements as a key-value pair
+		if strings.HasPrefix(s, "-") {
+			if len(first) == 1 {
+				// The last element is a key, not a key-value pair
+				return true
+			}
+
+			if strings.HasPrefix(first[1], "-") {
+				// The next element is a key, not a value
+				first = first[1:]
+				second = append(second[:i], second[i+1:]...)
+				continue
+			}
+
+			if first[1] != second[i+1] {
+				return false
+			}
+
+			first = first[2:]
+			second = append(second[:i], second[i+2:]...)
+		} else {
+			first = first[1:]
+			second = append(second[:i], second[i+1:]...)
 		}
 	}
 
-	return true, nil
+	return true
 }
