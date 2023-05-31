@@ -41,10 +41,10 @@ type FlinkDeploymentSpec struct {
 }
 
 type FlinkDeploymentStatus struct {
-	ReconciliationStatus string            `json:"reconciliationStatus,omitempty"`
-	JobManagerStatus     string            `json:"jobManagerDeploymentStatus"`
-	ClusterInfo          map[string]string `json:"clusterInfo"`
-	TaskManager          TaskManagerInfo   `json:"taskManager"`
+	// ReconciliationStatus string            `json:"reconciliationStatus,omitempty"`
+	JobManagerStatus string            `json:"jobManagerDeploymentStatus"`
+	ClusterInfo      map[string]string `json:"clusterInfo"`
+	TaskManager      TaskManagerInfo   `json:"taskManager"`
 }
 
 type JobManagerSpec struct {
