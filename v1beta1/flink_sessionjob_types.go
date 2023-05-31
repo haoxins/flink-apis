@@ -20,12 +20,12 @@ type FlinkSessionJobSpec struct {
 	FlinkConfiguration map[string]string `json:"flinkConfiguration,omitempty"`
 }
 
-func (sessionJob FlinkSessionJobSpec) Equals(other FlinkSessionJobSpec) bool {
+func (sessionJob *FlinkSessionJobSpec) Equals(other *FlinkSessionJobSpec) bool {
 	if sessionJob.DeploymentName != other.DeploymentName {
 		return false
 	}
 
-	return sessionJob.Job.Equals(other.Job)
+	return sessionJob.Job.Equals(&other.Job)
 }
 
 const (
@@ -51,7 +51,7 @@ type JobSpec struct {
 	AllowNonRestoredState bool     `json:"allowNonRestoredState,omitempty"`
 }
 
-func (job JobSpec) Equals(other JobSpec) bool {
+func (job *JobSpec) Equals(other *JobSpec) bool {
 	if job.JarURI != other.JarURI {
 		return false
 	}

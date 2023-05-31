@@ -7,14 +7,14 @@ import (
 
 var _ = Describe("Test FlinkSessionJobSpec", func() {
 	It("FlinkSessionJobSpec Equals should work", func() {
-		j1 := FlinkSessionJobSpec{
+		j1 := &FlinkSessionJobSpec{
 			DeploymentName: "test",
 			Job: JobSpec{
 				JarURI:      "test",
 				Parallelism: 1,
 			},
 		}
-		j2 := FlinkSessionJobSpec{
+		j2 := &FlinkSessionJobSpec{
 			DeploymentName: "test",
 			Job: JobSpec{
 				JarURI:      "test",
