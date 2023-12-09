@@ -6,8 +6,8 @@ require (
 	github.com/onsi/ginkgo/v2 v2.13.2
 	github.com/onsi/gomega v1.29.0
 	github.com/samber/lo v1.39.0
-	k8s.io/api v0.28.2
-	k8s.io/apimachinery v0.28.2
+	k8s.io/api v0.28.4
+	k8s.io/apimachinery v0.28.4
 	sigs.k8s.io/controller-runtime v0.16.2
 )
 
