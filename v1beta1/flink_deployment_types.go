@@ -17,34 +17,34 @@ type FlinkDeployment struct {
 }
 
 type FlinkDeploymentSpec struct {
-	Image string `json:"image"`
-
-	ImagePullPolicy string `json:"imagePullPolicy,omitempty"`
-
-	FlinkVersion string `json:"flinkVersion"`
-
-	FlinkConfiguration map[string]string `json:"flinkConfiguration,omitempty"`
-
-	LogConfiguration map[string]string `json:"logConfiguration,omitempty"`
-
-	ServiceAccount string `json:"serviceAccount"`
-
-	JobManager JobManagerSpec `json:"jobManager"`
-
-	TaskManager TaskManagerSpec `json:"taskManager"`
-
-	JobSpec JobSpec `json:"job,omitempty"`
-
-	PodTemplate corev1.PodTemplate `json:"podTemplate,omitempty"`
-
-	RestartNonce int64 `json:"restartNonce,omitempty"`
+	Image              string                 `json:"image"`
+	ImagePullPolicy    string                 `json:"imagePullPolicy,omitempty"`
+	FlinkVersion       string                 `json:"flinkVersion"`
+	FlinkConfiguration map[string]string      `json:"flinkConfiguration,omitempty"`
+	LogConfiguration   map[string]string      `json:"logConfiguration,omitempty"`
+	ServiceAccount     string                 `json:"serviceAccount"`
+	JobManager         JobManagerSpec         `json:"jobManager"`
+	TaskManager        TaskManagerSpec        `json:"taskManager"`
+	JobSpec            JobSpec                `json:"job,omitempty"`
+	PodTemplateSpec    corev1.PodTemplateSpec `json:"podTemplate,omitempty"`
+	RestartNonce       int64                  `json:"restartNonce,omitempty"`
 }
 
 type FlinkDeploymentStatus struct {
-	// ReconciliationStatus string            `json:"reconciliationStatus,omitempty"`
+	Error            string            `json:"error"`
 	JobManagerStatus string            `json:"jobManagerDeploymentStatus"`
 	ClusterInfo      map[string]string `json:"clusterInfo"`
 	TaskManager      TaskManagerInfo   `json:"taskManager"`
+	JobStatus        JobStatusInfo     `json:"jobStatus"`
+	LifecycleState   string            `json:"lifecycleState"`
+}
+
+type JobStatusInfo struct {
+	JobId      string `json:"jobId"`
+	JobName    string `json:"jobName"`
+	StartTime  string `json:"startTime"`
+	State      string `json:"state"`
+	UpdateTime string `json:"updateTime"`
 }
 
 type JobManagerSpec struct {
@@ -71,16 +71,11 @@ type TaskManagerInfo struct {
 }
 
 const (
-	JobManagerStatusReady = "READY"
-
+	JobManagerStatusReady            = "READY"
 	JobManagerStatusDeployedNotReady = "DEPLOYED_NOT_READY"
-
-	JobManagerStatusDeploying = "DEPLOYING"
-
-	// TODO: currently a mix of SUSPENDED and ERROR, needs cleanup
-	JobManagerStatusMissing = "MISSING"
-
-	JobManagerStatusError = "ERROR"
+	JobManagerStatusDeploying        = "DEPLOYING"
+	JobManagerStatusMissing          = "MISSING"
+	JobManagerStatusError            = "ERROR"
 )
 
 //+kubebuilder:object:root=true
