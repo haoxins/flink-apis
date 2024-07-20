@@ -1,9 +1,8 @@
 package v1beta1
 
 import (
+	"slices"
 	"strings"
-
-	"github.com/samber/lo"
 )
 
 func IsArgsEqual(first []string, second []string) bool {
@@ -14,7 +13,7 @@ func IsArgsEqual(first []string, second []string) bool {
 	for len(first) > 0 {
 		s := first[0]
 
-		_, i, _ := lo.FindIndexOf(second, func(str string) bool {
+		i := slices.IndexFunc(second, func(str string) bool {
 			return s == str
 		})
 
