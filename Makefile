@@ -3,7 +3,7 @@ $(LOCALBIN):
 	mkdir -p $(LOCALBIN)
 
 CONTROLLER_GEN ?= $(LOCALBIN)/controller-gen
-CONTROLLER_TOOLS_VERSION ?= v0.14.0
+CONTROLLER_TOOLS_VERSION ?= v0.15.0 # https://github.com/kubernetes-sigs/controller-tools/tags
 
 .PHONY: controller-gen
 controller-gen: $(CONTROLLER_GEN)
@@ -15,6 +15,7 @@ gen: controller-gen
 	$(CONTROLLER_GEN) object paths="./..."
 
 all: gen
+	go mod tidy
 	go fmt ./...
 	go vet ./...
 	go test -v --cover ./...
