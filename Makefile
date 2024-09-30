@@ -3,7 +3,7 @@ $(LOCALBIN):
 	mkdir -p $(LOCALBIN)
 
 CONTROLLER_GEN ?= $(LOCALBIN)/controller-gen
-CONTROLLER_TOOLS_VERSION ?= v0.15.0 # https://github.com/kubernetes-sigs/controller-tools/tags
+CONTROLLER_TOOLS_VERSION ?= v0.16.3 # https://github.com/kubernetes-sigs/controller-tools/tags
 
 .PHONY: controller-gen
 controller-gen: $(CONTROLLER_GEN)
